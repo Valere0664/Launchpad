@@ -18,6 +18,7 @@ class ItunesQueryService {
     static var shared = ItunesQueryService()
     
     private let defaultSession = URLSession.shared
+    private var dataTask: URLSessionDataTask?
     private(set) var errorMessage = ""
     
     var tracksUpdate: (() -> ())?
@@ -52,7 +53,7 @@ class ItunesQueryService {
             tracks.removeAll()
             return
         }
-        
+        dataTask?.cancel()
         errorMessage = ""
         let dataTask = defaultSession.dataTask(with: url) { data, response, error in
             
@@ -94,6 +95,7 @@ class ItunesQueryService {
                 self.tracks = responseTracks
             }
         }
+        self.dataTask = dataTask
         dataTask.resume()
     }
 }
