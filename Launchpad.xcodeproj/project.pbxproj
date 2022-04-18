@@ -7,15 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2257E9282809653D003546C3 /* TrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2257E9272809653D003546C3 /* TrackTableViewCell.swift */; };
 		22B879DB2807BDA000E20A3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B879DA2807BDA000E20A3D /* AppDelegate.swift */; };
 		22B879DD2807BDA000E20A3D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B879DC2807BDA000E20A3D /* SceneDelegate.swift */; };
 		22B879DF2807BDA000E20A3D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B879DE2807BDA000E20A3D /* ViewController.swift */; };
 		22B879E22807BDA000E20A3D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22B879E02807BDA000E20A3D /* Main.storyboard */; };
 		22B879E42807BDA100E20A3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22B879E32807BDA100E20A3D /* Assets.xcassets */; };
 		22B879E72807BDA100E20A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22B879E52807BDA100E20A3D /* LaunchScreen.storyboard */; };
+		22B879EF2807C01300E20A3D /* LaunchpadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B879EE2807C01300E20A3D /* LaunchpadView.swift */; };
+		22B879F22807F44600E20A3D /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B879F12807F44600E20A3D /* UserDefaults.swift */; };
+		22B879F428082E9600E20A3D /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B879F328082E9600E20A3D /* SearchTableViewController.swift */; };
+		22B879F62809508900E20A3D /* ItunesQueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B879F52809508900E20A3D /* ItunesQueryService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2257E9272809653D003546C3 /* TrackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackTableViewCell.swift; sourceTree = "<group>"; };
 		22B879D72807BDA000E20A3D /* Launchpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Launchpad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22B879DA2807BDA000E20A3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22B879DC2807BDA000E20A3D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +30,10 @@
 		22B879E32807BDA100E20A3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22B879E62807BDA100E20A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		22B879E82807BDA100E20A3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22B879EE2807C01300E20A3D /* LaunchpadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchpadView.swift; sourceTree = "<group>"; };
+		22B879F12807F44600E20A3D /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		22B879F328082E9600E20A3D /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
+		22B879F52809508900E20A3D /* ItunesQueryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItunesQueryService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,13 +68,26 @@
 			children = (
 				22B879DA2807BDA000E20A3D /* AppDelegate.swift */,
 				22B879DC2807BDA000E20A3D /* SceneDelegate.swift */,
+				22B879F52809508900E20A3D /* ItunesQueryService.swift */,
 				22B879DE2807BDA000E20A3D /* ViewController.swift */,
+				22B879F328082E9600E20A3D /* SearchTableViewController.swift */,
+				2257E9272809653D003546C3 /* TrackTableViewCell.swift */,
+				22B879EE2807C01300E20A3D /* LaunchpadView.swift */,
+				22B879F02807F42900E20A3D /* Extension */,
 				22B879E02807BDA000E20A3D /* Main.storyboard */,
 				22B879E32807BDA100E20A3D /* Assets.xcassets */,
 				22B879E52807BDA100E20A3D /* LaunchScreen.storyboard */,
 				22B879E82807BDA100E20A3D /* Info.plist */,
 			);
 			path = Launchpad;
+			sourceTree = "<group>";
+		};
+		22B879F02807F42900E20A3D /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				22B879F12807F44600E20A3D /* UserDefaults.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,7 +162,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				22B879DF2807BDA000E20A3D /* ViewController.swift in Sources */,
+				22B879F428082E9600E20A3D /* SearchTableViewController.swift in Sources */,
+				22B879F22807F44600E20A3D /* UserDefaults.swift in Sources */,
+				2257E9282809653D003546C3 /* TrackTableViewCell.swift in Sources */,
+				22B879EF2807C01300E20A3D /* LaunchpadView.swift in Sources */,
 				22B879DB2807BDA000E20A3D /* AppDelegate.swift in Sources */,
+				22B879F62809508900E20A3D /* ItunesQueryService.swift in Sources */,
 				22B879DD2807BDA000E20A3D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
