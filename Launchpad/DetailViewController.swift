@@ -61,7 +61,7 @@ class DetailViewController: UIViewController {
     private func updateLaunchpadButton(x: Int, y: Int) {
         let button = launchpadView.buttonFor(x: x, y: y)
         if let track = TrackStorageManager[x: x, y: y] {
-            if track.collectionViewURL == self.track.collectionViewURL {
+            if track == self.track {
                 button.layer.borderWidth = 6
                 button.layer.borderColor = UIColor.systemBlue.cgColor
             } else {
@@ -173,7 +173,7 @@ extension DetailViewController {
 
 extension DetailViewController: LaunchpadViewDelegate {
     func didSelectRowAt(x: Int, y: Int) {
-        if let track = TrackStorageManager[x: x, y: y], track.collectionViewURL == self.track.collectionViewURL {
+        if let track = TrackStorageManager[x: x, y: y], track == self.track {
             TrackStorageManager[x: x, y: y] = nil
         } else {
             TrackStorageManager[x: x, y: y] = self.track

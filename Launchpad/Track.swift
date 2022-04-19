@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Track: Decodable {
+struct Track: Decodable, Equatable {
     let id: Int
     let name: String
     
@@ -39,6 +39,10 @@ struct Track: Decodable {
         collectionId = try container.decode(Int.self, forKey: .collectionId)
         collectionName = try container.decode(String.self, forKey: .collectionName)
         collectionViewURL = try container.decode(URL.self, forKey: .collectionViewUrl)
+    }
+    
+    static func == (lhs: Track, rhs: Track) -> Bool {
+        return lhs.id == rhs.id
     }
 }
 
