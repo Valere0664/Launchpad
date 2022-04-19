@@ -12,7 +12,7 @@ class TrackTableViewCell: UITableViewCell {
     func configCell(_ track: Track, image: UIImage? = nil) {
         var content = self.defaultContentConfiguration()
         content.text = "\(track.name)"
-        content.secondaryText = track.artist
+        content.secondaryText = track.artistName
         DispatchQueue.global().async { [weak self] in
             self?.downloadImage(with: track.artworkURL) { [weak self] image in
                 DispatchQueue.main.async {

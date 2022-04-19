@@ -99,7 +99,7 @@ extension DetailViewController {
         title = "Details"
         
         let firstRow  = makeRow(of: "Name: ", with: track.name)
-        let secondRow = makeRow(of: "Artist: ", with: track.artist)
+        let secondRow = makeRow(of: "Artist: ", with: track.artistName)
         let thirdRow  = makeRow(of: "URL: ", with: track.collectionViewURL.absoluteString)
         let imageView = UIImageView(image: UIImage(systemName: "photo"))
         imageView.translatesAutoresizingMaskIntoConstraints = false

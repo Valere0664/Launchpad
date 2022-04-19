@@ -55,7 +55,6 @@ class ItunesQueryService {
                 self.tracks.removeAll()
             } else if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 {
                 var responseDict: [String: Any]?
-                var responseTracks: [Track] = []
                 
                 do {
                     responseDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
@@ -71,21 +70,14 @@ class ItunesQueryService {
                     return
                 }
                 
-                for trackDictionary in array {
-                    if let trackDictionary = trackDictionary as? [String: Any],
-                       let name = trackDictionary["trackName"] as? String,
-                       let artist = trackDictionary["artistName"] as? String,
-                       let artworkURLString = trackDictionary["artworkUrl100"] as? String,
-                       let artworkURL = URL(string: artworkURLString),
-                       let collectionViewURLString = trackDictionary["collectionViewUrl"] as? String,
-                       let collectionViewURL = URL(string: collectionViewURLString) {
-                        responseTracks.append(Track(name: name, artist: artist, artworkURL: artworkURL, collectionViewURL: collectionViewURL))
-                    } else {
-                        self.errorMessage += "Problem parsing trackDictionary\n"
-                        self.tracks.removeAll()
-                    }
+                do {
+                    let responseData = try JSONSerialization.data(withJSONObject: array, options: .prettyPrinted)
+                    self.tracks = try JSONDecoder().decode([Track].self, from: responseData)
+                } catch let parseError as NSError {
+                    self.errorMessage += "JSONDecoder error: \(parseError.localizedDescription)\n"
+                    self.tracks.removeAll()
+                    return
                 }
-                self.tracks = responseTracks
             }
         }
         self.dataTask = dataTask
