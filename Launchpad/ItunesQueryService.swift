@@ -6,13 +6,6 @@
 //
 import UIKit
 
-struct Track {
-    let name: String
-    let artist: String
-    let artworkURL: URL
-    let collectionViewURL: URL
-}
-
 class ItunesQueryService {
     
     static var shared = ItunesQueryService()

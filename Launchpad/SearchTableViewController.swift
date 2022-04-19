@@ -48,6 +48,13 @@ class SearchTableViewController: UITableViewController {
         }
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row < service.tracks.count {
+            let detailViewController = DetailViewController(track: service.tracks[indexPath.row])
+            navigationController?.pushViewController(detailViewController, animated: true)
+        }
+    }
 }
 
 

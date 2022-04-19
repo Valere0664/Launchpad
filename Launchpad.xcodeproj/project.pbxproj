@@ -18,6 +18,8 @@
 		22B879F22807F44600E20A3D /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B879F12807F44600E20A3D /* UserDefaults.swift */; };
 		22B879F428082E9600E20A3D /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B879F328082E9600E20A3D /* SearchTableViewController.swift */; };
 		22B879F62809508900E20A3D /* ItunesQueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B879F52809508900E20A3D /* ItunesQueryService.swift */; };
+		22E5B5EE280D4D9300F44DDF /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E5B5ED280D4D9300F44DDF /* DetailViewController.swift */; };
+		22E5B5F0280D5F4600F44DDF /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E5B5EF280D5F4500F44DDF /* Track.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		22B879F12807F44600E20A3D /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		22B879F328082E9600E20A3D /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		22B879F52809508900E20A3D /* ItunesQueryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItunesQueryService.swift; sourceTree = "<group>"; };
+		22E5B5ED280D4D9300F44DDF /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		22E5B5EF280D5F4500F44DDF /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,9 +72,11 @@
 			children = (
 				22B879DA2807BDA000E20A3D /* AppDelegate.swift */,
 				22B879DC2807BDA000E20A3D /* SceneDelegate.swift */,
+				22E5B5EF280D5F4500F44DDF /* Track.swift */,
 				22B879F52809508900E20A3D /* ItunesQueryService.swift */,
 				22B879DE2807BDA000E20A3D /* ViewController.swift */,
 				22B879F328082E9600E20A3D /* SearchTableViewController.swift */,
+				22E5B5ED280D4D9300F44DDF /* DetailViewController.swift */,
 				2257E9272809653D003546C3 /* TrackTableViewCell.swift */,
 				22B879EE2807C01300E20A3D /* LaunchpadView.swift */,
 				22B879F02807F42900E20A3D /* Extension */,
@@ -161,6 +167,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22E5B5EE280D4D9300F44DDF /* DetailViewController.swift in Sources */,
+				22E5B5F0280D5F4600F44DDF /* Track.swift in Sources */,
 				22B879DF2807BDA000E20A3D /* ViewController.swift in Sources */,
 				22B879F428082E9600E20A3D /* SearchTableViewController.swift in Sources */,
 				22B879F22807F44600E20A3D /* UserDefaults.swift in Sources */,

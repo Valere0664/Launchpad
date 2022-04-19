@@ -51,6 +51,10 @@ class LaunchpadView: UIView {
         }
     }
     
+    func buttonFor(x: Int, y: Int) -> UIButton {
+        buttons[y][x]
+    }
+    
     private func updateButtonCount() {
         if rowButtonCount == 0 || columnButtonCount == 0 {
             return
@@ -87,7 +91,9 @@ class LaunchpadView: UIView {
         let button = UIButton(type: .system)
         button.addTarget(self, action: #selector(launchPadButtonAction), for: .touchUpInside)
         button.backgroundColor = .gray
+        button.contentMode = .center
         button.layer.cornerRadius = Constant.buttonCornerRadius
+        button.clipsToBounds = true
         return button
     }
     
