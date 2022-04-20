@@ -17,6 +17,12 @@ struct Track: Decodable, Equatable {
     
     let artworkURL: URL
     let previewURL: URL
+    var downloadPreviewURL: URL? {
+        if case let .success(url) = TrackStorageManager.shared.previewBuffer[previewURL] {
+            return url
+        }
+        return nil
+    }
     
     let collectionId: Int
     let collectionName: String
@@ -46,7 +52,7 @@ struct Track: Decodable, Equatable {
     }
 }
 
-class TrackStorageManager {
+class TrackStorageManager: NSObject {
     
     static var shared = TrackStorageManager()
     static subscript(x column: Int, y row: Int) -> Track? {
@@ -59,5 +65,75 @@ class TrackStorageManager {
     }
     
     private var tracksBuffer: [IndexPath: Track] = [:]
-    private var previewBuffer: [URL: URL] = [:]
+    private(set) var previewBuffer: [URL: PreviewStatus] = [:]
+    
+    private let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    private lazy var downloadsSession: URLSession = {
+      let configuration = URLSessionConfiguration.background(withIdentifier:
+        "iTunes.bgSession")
+      return URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
+    }()
+    
+}
+
+// MARK: - Preview function
+extension TrackStorageManager {
+    enum PreviewStatus {
+        case loading(URLSessionDownloadTask, [(URL?) -> ()])
+        case failed
+        case success(URL)
+    }
+    
+    func downloadPreview(_ track: Track, completion: ((URL?) -> ())? = nil) {
+        if let previewStatus = previewBuffer[track.previewURL] {
+            switch previewStatus {
+            case .success(let url):
+                completion?(url)
+            case .failed:
+                completion?(nil)
+            case .loading(let tesk, var completions):
+                if let completion = completion {
+                    completions.append(completion)
+                    previewBuffer[track.previewURL] = .loading(tesk, completions)
+                }
+            }
+        } else {
+            let tesk = downloadsSession.downloadTask(with: track.previewURL)
+            if let completion = completion {
+                previewBuffer[track.previewURL] = .loading(tesk, [completion])
+            } else {
+                previewBuffer[track.previewURL] = .loading(tesk, [])
+            }
+            tesk.resume()
+        }
+    }
+}
+
+extension TrackStorageManager: URLSessionDownloadDelegate {
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        print("urlSession downloadTask", location, downloadTask.originalRequest)
+        guard let sourceURL = downloadTask.originalRequest?.url else {
+            return
+        }
+        
+        let destinationURL = documentsPath.appendingPathComponent(sourceURL.lastPathComponent)
+        
+        let fileManager = FileManager.default
+        try? fileManager.removeItem(at: destinationURL)
+        
+        do {
+            try fileManager.copyItem(at: location, to: destinationURL)
+        } catch let error {
+            print("Could not copy file to disk: \(error.localizedDescription)")
+        }
+        
+        if let stetus = previewBuffer[sourceURL] {
+            if case let .loading(_, completions) = stetus {
+                previewBuffer[sourceURL] = .success(destinationURL)
+                for completion in completions {
+                    completion(location)
+                }
+            }
+        }
+    }
 }

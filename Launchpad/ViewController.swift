@@ -7,19 +7,13 @@
 
 import UIKit
 import Combine
+import AVFoundation
 
 class ViewController: UIViewController {
     
     lazy var launchpadView: LaunchpadView = {
         let launchpadView = LaunchpadView(frame: view.bounds)
-        launchpadView.columnButtonCount = UserDefaults.columnButtonCount
-        launchpadView.rowButtonCount = UserDefaults.rowButtonCount
-        UserDefaults.$columnButtonCount
-            .assign(to: \.columnButtonCount, on: launchpadView)
-            .store(in: &subscribers)
-        UserDefaults.$rowButtonCount
-            .assign(to: \.rowButtonCount, on: launchpadView)
-            .store(in: &subscribers)
+        launchpadView.delegate = self
         return launchpadView
     }()
     private var subscribers: [AnyCancellable] = []
@@ -35,8 +29,24 @@ class ViewController: UIViewController {
             launchpadView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             launchpadView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+        
+        let audioSession = AVAudioSession.sharedInstance()
+        try? audioSession.setCategory(.playback)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        launchpadView.columnButtonCount = UserDefaults.columnButtonCount
+        launchpadView.rowButtonCount = UserDefaults.rowButtonCount
+    }
+}
 
+extension ViewController: LaunchpadViewDelegate {
+    func didSelectRowAt(x: Int, y: Int) {
+        if let url = TrackStorageManager[x: x, y: y]?.downloadPreviewURL {
+            let player = AVPlayer(url: url)
+            player.play()
+        }
+    }
 }
 

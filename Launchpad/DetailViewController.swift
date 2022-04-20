@@ -177,6 +177,7 @@ extension DetailViewController: LaunchpadViewDelegate {
             TrackStorageManager[x: x, y: y] = nil
         } else {
             TrackStorageManager[x: x, y: y] = self.track
+            TrackStorageManager.shared.downloadPreview(self.track)
         }
         updateLaunchpadButton(x: x, y: y)
     }
