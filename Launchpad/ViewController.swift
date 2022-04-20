@@ -17,6 +17,8 @@ class ViewController: UIViewController {
         return launchpadView
     }()
     private var subscribers: [AnyCancellable] = []
+    
+    var players: [AVPlayer?] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,15 +31,14 @@ class ViewController: UIViewController {
             launchpadView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             launchpadView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
-        
-        let audioSession = AVAudioSession.sharedInstance()
-        try? audioSession.setCategory(.playback)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         launchpadView.columnButtonCount = UserDefaults.columnButtonCount
         launchpadView.rowButtonCount = UserDefaults.rowButtonCount
+        
+        players = Array(repeating: nil, count: launchpadView.columnButtonCount * launchpadView.rowButtonCount)
     }
 }
 
@@ -46,6 +47,7 @@ extension ViewController: LaunchpadViewDelegate {
         if let url = TrackStorageManager[x: x, y: y]?.downloadPreviewURL {
             let player = AVPlayer(url: url)
             player.play()
+            players[y + x * launchpadView.rowButtonCount] = player
         }
     }
 }
