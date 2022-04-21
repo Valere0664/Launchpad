@@ -126,13 +126,13 @@ extension DetailViewController {
         scrollView.addSubview(imageView)
         scrollView.addSubview(contentView)
         NSLayoutConstraint.activate([
-            imageView.leftAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leftAnchor, constant: 20),
+            imageView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
             imageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 30),
             imageView.widthAnchor.constraint(equalToConstant: 80),
             imageView.heightAnchor.constraint(equalToConstant: 80),
             contentView.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 12),
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20),
-            contentView.rightAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.rightAnchor, constant: -20),
+            contentView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20),
         ])
         
         scrollView.addSubview(launchpadView)
@@ -145,6 +145,38 @@ extension DetailViewController {
         
         view.layoutIfNeeded()
         scrollView.contentSize = CGSize(width: launchpadView.frame.maxX, height: launchpadView.frame.maxY)
+        
+        // setup Stepper View
+        let rowStepper = StepperRowView(count: launchpadView.rowButtonCount)
+        let columnStepper = StepperRowView(count: launchpadView.columnButtonCount)
+        rowStepper.valueChange = { count in
+            UserDefaults.rowButtonCount = count
+        }
+        columnStepper.valueChange = { count in
+            UserDefaults.columnButtonCount = count
+        }
+        
+        let stepperContentView = UIStackView(arrangedSubviews: [rowStepper, columnStepper])
+        stepperContentView.axis = .vertical
+        stepperContentView.backgroundColor = .white
+        stepperContentView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(stepperContentView)
+        NSLayoutConstraint.activate([
+            stepperContentView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            stepperContentView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            stepperContentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+        
+        let divider = UIView()
+        divider.backgroundColor = .gray
+        divider.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(divider)
+        NSLayoutConstraint.activate([
+            divider.leftAnchor.constraint(equalTo: view.leftAnchor),
+            divider.rightAnchor.constraint(equalTo: view.rightAnchor),
+            divider.bottomAnchor.constraint(equalTo: stepperContentView.topAnchor),
+            divider.heightAnchor.constraint(equalToConstant: 0.5)
+        ])
     }
     
     private func makeLabel(with text: String) -> UILabel {

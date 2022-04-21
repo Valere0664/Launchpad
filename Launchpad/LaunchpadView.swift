@@ -73,7 +73,7 @@ class LaunchpadView: UIView {
         }
 
         // x count
-        for yindex in 0..<columnButtonCount {
+        for yindex in 0..<rowButtonCount {
             while buttons[yindex].count != columnButtonCount {
                 if buttons[yindex].count < columnButtonCount {
                     let button = getLaunchPadButton()

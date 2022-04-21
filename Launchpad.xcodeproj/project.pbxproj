@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2257E9282809653D003546C3 /* TrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2257E9272809653D003546C3 /* TrackTableViewCell.swift */; };
+		228388842811688900E1E029 /* StepperRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228388832811688900E1E029 /* StepperRowView.swift */; };
 		22B879DB2807BDA000E20A3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B879DA2807BDA000E20A3D /* AppDelegate.swift */; };
 		22B879DD2807BDA000E20A3D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B879DC2807BDA000E20A3D /* SceneDelegate.swift */; };
 		22B879DF2807BDA000E20A3D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B879DE2807BDA000E20A3D /* ViewController.swift */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		2257E9272809653D003546C3 /* TrackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackTableViewCell.swift; sourceTree = "<group>"; };
+		228388832811688900E1E029 /* StepperRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperRowView.swift; sourceTree = "<group>"; };
 		22B879D72807BDA000E20A3D /* Launchpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Launchpad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22B879DA2807BDA000E20A3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22B879DC2807BDA000E20A3D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				22E5B5ED280D4D9300F44DDF /* DetailViewController.swift */,
 				2257E9272809653D003546C3 /* TrackTableViewCell.swift */,
 				22B879EE2807C01300E20A3D /* LaunchpadView.swift */,
+				228388832811688900E1E029 /* StepperRowView.swift */,
 				22B879F02807F42900E20A3D /* Extension */,
 				22B879E02807BDA000E20A3D /* Main.storyboard */,
 				22B879E32807BDA100E20A3D /* Assets.xcassets */,
@@ -172,6 +175,7 @@
 				22B879DF2807BDA000E20A3D /* ViewController.swift in Sources */,
 				22B879F428082E9600E20A3D /* SearchTableViewController.swift in Sources */,
 				22B879F22807F44600E20A3D /* UserDefaults.swift in Sources */,
+				228388842811688900E1E029 /* StepperRowView.swift in Sources */,
 				2257E9282809653D003546C3 /* TrackTableViewCell.swift in Sources */,
 				22B879EF2807C01300E20A3D /* LaunchpadView.swift in Sources */,
 				22B879DB2807BDA000E20A3D /* AppDelegate.swift in Sources */,
