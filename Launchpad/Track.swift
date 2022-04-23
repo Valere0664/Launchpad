@@ -52,6 +52,11 @@ struct Track: Decodable, Equatable {
     }
 }
 
+struct ITunesAPIResponse: Decodable {
+    let resultCount: Int
+    let results: [Track]
+}
+
 class TrackStorageManager: NSObject {
     
     static var shared = TrackStorageManager()

@@ -16,7 +16,7 @@ class ItunesQueryService {
     
     var tracksUpdate: (() -> ())?
     
-    var searchText = "Coldplay" {
+    var searchText = "" {
         didSet {
             if searchText.isEmpty {
                 tracks.removeAll()
@@ -34,9 +34,7 @@ class ItunesQueryService {
         }
     }
     
-    init() {
-//        getSearchResults()
-    }
+    private init() { }
     
     private func getSearchResults() {
         var urlComponents = URLComponents(string: "https://itunes.apple.com/search")!
@@ -54,25 +52,9 @@ class ItunesQueryService {
                 self.errorMessage += "DataTask error: \(error.localizedDescription)\n"
                 self.tracks.removeAll()
             } else if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 {
-                var responseDict: [String: Any]?
                 
                 do {
-                    responseDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                } catch let parseError as NSError {
-                    self.errorMessage += "JSONSerialization error: \(parseError.localizedDescription)\n"
-                    self.tracks.removeAll()
-                    return
-                }
-                
-                guard let array = responseDict!["results"] as? [Any] else {
-                    self.errorMessage += "Dictionary does not contain results key\n"
-                    self.tracks.removeAll()
-                    return
-                }
-                
-                do {
-                    let responseData = try JSONSerialization.data(withJSONObject: array, options: .prettyPrinted)
-                    self.tracks = try JSONDecoder().decode([Track].self, from: responseData)
+                    self.tracks = (try JSONDecoder().decode(ITunesAPIResponse.self, from: data)).results
                 } catch let parseError as NSError {
                     self.errorMessage += "JSONDecoder error: \(parseError.localizedDescription)\n"
                     self.tracks.removeAll()
