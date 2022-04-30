@@ -35,6 +35,11 @@ class ViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        reloadLaunchpadData()
+    }
+    
+    private func reloadLaunchpadData() {
         launchpadView.columnButtonCount = UserDefaults.columnButtonCount
         launchpadView.rowButtonCount = UserDefaults.rowButtonCount
         
@@ -43,6 +48,7 @@ class ViewController: UIViewController {
         for x in 0..<launchpadView.columnButtonCount {
             for y in 0..<launchpadView.rowButtonCount {
                 let button = launchpadView.buttonFor(x: x, y: y)
+                button.backgroundColor = .gray
                 let imageView: UIImageView!
                 if let view = button.viewWithTag(5) as? UIImageView {
                     imageView = view
@@ -76,6 +82,15 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func editAction(_ sender: Any) {
+        let editViewController = SearchTableViewController()
+        let editNavigationController = UINavigationController(rootViewController: editViewController)
+        editNavigationController.transitioningDelegate = self
+        
+        present(editNavigationController, animated: true)
+        players.removeAll()
+    }
 }
 
 extension ViewController: LaunchpadViewDelegate {
@@ -106,6 +121,13 @@ extension ViewController: AVAudioPlayerDelegate {
                 }
             }
         }
+    }
+}
+
+extension ViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        reloadLaunchpadData()
+        return nil
     }
 }
 

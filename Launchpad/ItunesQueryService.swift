@@ -8,7 +8,7 @@ import UIKit
 
 class ItunesQueryService {
     
-    static var shared = ItunesQueryService()
+    static let shared = ItunesQueryService()
     
     private let defaultSession = URLSession.shared
     private var dataTask: URLSessionDataTask?

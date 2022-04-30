@@ -30,6 +30,15 @@ class SearchTableViewController: UITableViewController {
             self?.tableView.reloadData()
         }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if searchController.searchBar.text == "" {
+            DispatchQueue.main.async {
+                self.searchController.searchBar.searchTextField.becomeFirstResponder()
+            }
+        }
+    }
 
     // MARK: - Table view data source
 
