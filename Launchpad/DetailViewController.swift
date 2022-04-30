@@ -54,6 +54,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.isNavigationBarHidden = true
         setupView()
         loadLaunchpad()
     }
@@ -202,6 +203,7 @@ extension DetailViewController {
     }
 }
 
+// MARK: - LaunchpadViewDelegate
 extension DetailViewController: LaunchpadViewDelegate {
     func didSelectRowAt(x: Int, y: Int) {
         if let track = TrackStorageManager[x: x, y: y], track == self.track {

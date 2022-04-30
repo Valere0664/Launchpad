@@ -59,16 +59,27 @@ class SearchTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row < service.tracks.count {
-            let detailViewController = DetailViewController(track: service.tracks[indexPath.row])
-            navigationController?.pushViewController(detailViewController, animated: true)
-        }
+        guard indexPath.row < service.tracks.count else { return }
+        
+        let detailViewController = DetailViewController(track: service.tracks[indexPath.row])
+        splitViewController?.setViewController(detailViewController, for: .secondary)
+//        if let detailViewController = splitViewController?.viewController(for: .secondary) as? DetailViewController {
+//            detailViewController.track = service.tracks[indexPath.row]
+//        } else {
+//            let detailViewController = DetailViewController(track: service.tracks[indexPath.row])
+//            splitViewController?.setViewController(detailViewController, for: .secondary)
+//        }
+        splitViewController?.show(.secondary)
     }
 }
 
 
 // MARK: - UISearchControllerDelegate, UISearchResultsUpdating
 extension SearchTableViewController: UISearchControllerDelegate, UISearchResultsUpdating {
+    func willDismissSearchController(_ searchController: UISearchController) {
+        splitViewController?.dismiss(animated: true)
+    }
+    
     func updateSearchResults(for searchController: UISearchController) {
         let searchedText = searchController.searchBar.text ?? ""
         if searchedText.isEmpty {

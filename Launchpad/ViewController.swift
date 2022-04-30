@@ -85,14 +85,19 @@ class ViewController: UIViewController {
     
     @IBAction func editAction(_ sender: Any) {
         let editViewController = SearchTableViewController()
-        let editNavigationController = UINavigationController(rootViewController: editViewController)
-        editNavigationController.transitioningDelegate = self
         
-        present(editNavigationController, animated: true)
+        let splitViewController = UISplitViewController(style: .doubleColumn)
+        splitViewController.preferredDisplayMode = .twoDisplaceSecondary
+        splitViewController.presentsWithGesture = false
+        splitViewController.setViewController(editViewController, for: .primary)
+        
+        splitViewController.transitioningDelegate = self
+        present(splitViewController, animated: true)
         players.removeAll()
     }
 }
 
+// MARK: - LaunchpadViewDelegate
 extension ViewController: LaunchpadViewDelegate {
     func didSelectRowAt(x: Int, y: Int) {
         guard players[y + x * launchpadView.rowButtonCount] == nil else {
@@ -110,6 +115,7 @@ extension ViewController: LaunchpadViewDelegate {
     }
 }
 
+// MARK: - AVAudioPlayerDelegate
 extension ViewController: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         for x in 0..<launchpadView.columnButtonCount {
@@ -124,6 +130,7 @@ extension ViewController: AVAudioPlayerDelegate {
     }
 }
 
+// MARK: - UIViewControllerTransitioningDelegate
 extension ViewController: UIViewControllerTransitioningDelegate {
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         reloadLaunchpadData()
