@@ -95,7 +95,7 @@ class DetailViewController: UIViewController {
 
 extension DetailViewController {
     private func setupView() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         title = "Details"
         
         let firstRow  = makeRow(of: "Name: ", with: track.name)
@@ -158,7 +158,7 @@ extension DetailViewController {
         
         let stepperContentView = UIStackView(arrangedSubviews: [rowStepper, columnStepper])
         stepperContentView.axis = .vertical
-        stepperContentView.backgroundColor = .white
+        stepperContentView.backgroundColor = .systemBackground
         stepperContentView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stepperContentView)
         NSLayoutConstraint.activate([
@@ -181,7 +181,6 @@ extension DetailViewController {
     
     private func makeLabel(with text: String) -> UILabel {
         let label = UILabel(frame: .zero)
-        label.textColor = .black
         label.font = .systemFont(ofSize: 14)
         label.numberOfLines = 0
         label.text = text
